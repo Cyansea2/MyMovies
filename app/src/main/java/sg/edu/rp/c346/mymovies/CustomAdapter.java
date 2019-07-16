@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class CustomAdapter extends ArrayAdapter {
@@ -23,20 +25,21 @@ public class CustomAdapter extends ArrayAdapter {
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Obtain the LayoutInflater object
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        // "Inflate" the View for each row
         View rowView = inflater.inflate(resource, parent, false);
 
-        // Obtain the UI components and do the necessary binding
         TextView tvTitle = rowView.findViewById(R.id.tvTitle);
         TextView tvYear = rowView.findViewById(R.id.tvYear);
         TextView tvGenre = rowView.findViewById(R.id.tvGenre);
-        ImageView ivRated = rowView.findViewById(R.id.ivRating);
+        ImageView ivRated = rowView.findViewById(R.id.ivRated);
 
-        // Obtain the Android Version information based on the position
+
         Movie movie = objects.get(position);
+
+        tvTitle.setText(movie.getTitle());
+        tvYear.setText(movie.getYear());
+        tvGenre.setText(movie.getGenre());
 
         if(movie.getRated().equalsIgnoreCase("g")) {
             ivRated.setImageResource(R.drawable.rating_g);
@@ -56,7 +59,7 @@ public class CustomAdapter extends ArrayAdapter {
         else{
             ivRated.setImageResource(R.drawable.rating_r21);
         }
-        //remove
+
         return rowView;
     }
 }
